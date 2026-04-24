@@ -8,7 +8,7 @@
   <img alt="Language" src="https://img.shields.io/badge/C%23-.NET%20Framework%204.8-512bd4">
   <img alt="GUI" src="https://img.shields.io/badge/GUI-WinForms-5d8cff">
   <img alt="Platform" src="https://img.shields.io/badge/Platform-Windows-24292f">
-  <img alt="Device" src="https://img.shields.io/badge/Keyboard-ACGAM%20AC--109R-success">
+  <img alt="Keyboard" src="https://img.shields.io/badge/Keyboard-ACGAM%20AC--109R-success">
   <img alt="Transport" src="https://img.shields.io/badge/Transport-Windows%20HID-informational">
   <img alt="Version" src="https://img.shields.io/badge/Version-1.0.0-success">
   <img alt="License" src="https://img.shields.io/badge/License-GPL--3.0-blue">
@@ -16,53 +16,55 @@
 
 ## Overview
 
-AC109R Control is a small Windows application for the ACGAM AC-109R keyboard. It provides a stable alternative to the official Windows utility for common day-to-day tasks:
-
-- selecting one of the three onboard lighting profiles
-- clearing a profile
-- sending built-in static presets
-- creating personal profiles from built-in presets
-- importing, renaming, duplicating, and deleting personal JSON profiles
-- registering global software macros for media actions
-- starting automatically with Windows and launching minimized to the notification area
-- switching the interface between French and English
+AC109R Control is a small Windows application for the ACGAM AC-109R keyboard. It is designed as a stable alternative to the official Windows utility for everyday lighting profile control and software media macros.
 
 The USB lighting protocol implementation is based on the reverse-engineering work from [`franlego98/ac109rdriverlinux`](https://gitlab.com/franlego98/ac109rdriverlinux).
 
 ## Screenshots
 
-Add screenshots here when publishing the repository.
-
-```text
-docs/screenshots/static-profiles.png
-docs/screenshots/macros.png
-```
-
-Suggested Markdown once screenshots are available:
-
-```html
 <p align="center">
-  <img alt="Static profiles" src="docs/screenshots/static-profiles.png" width="760">
+  <img alt="AC109R Control main window" src="Docs/screenshots/main.png" width="820">
 </p>
-```
+
+<p align="center">
+  <img alt="AC109R Control macros tab" src="Docs/screenshots/macros.png" width="820">
+</p>
 
 ## Features
 
-### Static profiles
+### Lighting Profiles
 
-The application includes read-only built-in presets:
+- Select and control the three onboard keyboard profile slots.
+- Send built-in static presets such as rainbow, aurora, ocean, fire, warm white, and AC109 magenta.
+- Create editable personal profiles from built-in presets.
+- Import, rename, duplicate, delete, and open personal JSON profiles from the interface.
+- Fill the selected keyboard profile with a custom RGB color.
+- Save the current quick RGB color as a new personal profile.
 
-- Rainbow horizontal
-- Rainbow diagonal
-- Pink/blue aurora
-- Ocean
-- Fire
-- Warm white
-- AC109 magenta
+### Software Macros
 
-Built-in presets cannot be edited directly. Use **Create profile** to create an editable user profile.
+The macro tab registers global Windows hotkeys while AC109R Control is running. Supported actions are:
 
-### User JSON profiles
+- volume up
+- volume down
+- mute volume
+- play / pause
+- next track
+- previous track
+
+These macros are software-level Windows shortcuts. They do not rewrite the keyboard's internal macro memory because that part of the official protocol is not documented in the original Linux driver.
+
+### Windows Behavior
+
+- Optional startup with Windows for the current user.
+- Optional minimized startup when launched by Windows.
+- Notification area icon to keep macros active in the background.
+- Single-instance guard to prevent two copies from running at the same time.
+- French and English interface, configurable from the Settings tab.
+
+Administrator privileges are not required for normal use. Running elevated should only be needed for troubleshooting unusual HID access issues.
+
+## JSON Profiles
 
 Editable profiles are stored in:
 
@@ -86,59 +88,29 @@ Supported value shapes:
 - `[red, green, blue]` creates an opaque RGB color
 - `[red, green, blue, alpha]` creates an explicit RGBA key color
 
-The application can import, rename, duplicate, delete, and open the managed profile folder directly from the interface.
+## Release Notes
 
-### Languages
+### 1.0.0 - 2026-04-24
 
-The interface supports French and English. The selected language is stored in the application settings and can be changed from the **Settings** tab.
-
-### Administrator rights
-
-Administrator privileges are not required for normal use. AC109R Control uses the Windows HID API, current-user startup registration, and global hotkeys. Running elevated should only be needed for troubleshooting unusual device permission issues.
-
-### Single instance
-
-Only one copy of AC109R Control can run at a time. A second launch shows a message and exits.
-
-### Changelog
-
-The application includes a built-in **Changelog** tab. Version `1.0.0` is the first stable release.
-
-### Software macros
-
-The macro system uses global Windows hotkeys. It currently supports:
-
-- volume up
-- volume down
-- mute volume
-- play / pause
-- next track
-- previous track
-
-These macros are software-level Windows shortcuts. They do not rewrite the keyboard's internal macro memory, because that part of the official protocol is not documented in the original Linux driver.
-
-### Startup behavior
-
-The application can register itself under the current user's Windows startup registry key. Manual launches open the main window normally. Startup launches can be minimized using:
-
-```text
---minimized
-```
-
-The notification area icon keeps macros alive while the main window is hidden.
+- First stable release of AC109R Control.
+- Added built-in static presets and personal JSON profile management.
+- Added quick RGB fill and save-as-profile actions.
+- Added global software macros for volume and media controls.
+- Added French / English interface settings.
+- Added Windows startup, minimized startup, tray icon, and single-instance behavior.
 
 ## Build
 
 Requirements:
 
 - Windows
-- Visual Studio with .NET Framework 4.8 targeting pack
+- Visual Studio with the .NET Framework 4.8 targeting pack
 - MSBuild
 
-Build from the solution:
+Build from the solution directory:
 
 ```powershell
-& "C:\Program Files\Microsoft Visual Studio\18\Insiders\MSBuild\Current\Bin\MSBuild.exe" AC109RWinForms.sln /p:Configuration=Release /p:Platform="Any CPU"
+msbuild AC109RWinForms.sln /p:Configuration=Release /p:Platform="Any CPU"
 ```
 
 The executable is generated at:
@@ -173,7 +145,7 @@ The application writes the same profile stream structure used by the Linux proje
 
 ## Limitations
 
-- Firmware-native lighting effects are not implemented yet. The original Linux driver notes that the profile stream may contain an unknown keyboard-side program area, but it does not document the official firmware effect commands.
+- Firmware-native dynamic lighting effects are not implemented yet.
 - Macro support is implemented with Windows global hotkeys, not firmware-level keyboard macro programming.
 - The original public Linux project documents lighting profiles, not the complete official Windows software feature set.
 - If the official AC109R software is running, it may lock the HID interface. Close it before using this application.

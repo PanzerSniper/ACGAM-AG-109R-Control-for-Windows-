@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.props" Condition="Exists('$(MSBuildToolsPath)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -9,7 +9,7 @@
     <RootNamespace>Ac109RDriverWin</RootNamespace>
     <AssemblyName>Ac109RDriverWin</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <ApplicationIcon>..\AC109RWinForms_Icon\app.ico</ApplicationIcon>
+    <ApplicationIcon>AC109RWinForms_Icon\app.ico</ApplicationIcon>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -60,11 +60,6 @@
     <Compile Include="Profiles\KeyMap.cs" />
     <Compile Include="Profiles\ProfileData.cs" />
     <Compile Include="Profiles\ProfileParser.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Settings\AppConfiguration.cs" />
     <Compile Include="Settings\ConfigurationStore.cs" />
     <Compile Include="Settings\StartupManager.cs" />
@@ -73,12 +68,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\AC109RWinForms_Icon\app.ico" />
+    <None Include="AC109RWinForms_Icon\app.ico" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <Target Name="GenerateBuildInfo" BeforeTargets="BeforeCompile">

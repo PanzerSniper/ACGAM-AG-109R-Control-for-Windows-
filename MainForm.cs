@@ -1,4 +1,4 @@
-using Ac109RDriverWin.Hardware;
+﻿using Ac109RDriverWin.Hardware;
 using Ac109RDriverWin.Macros;
 using Ac109RDriverWin.Profiles;
 using Ac109RDriverWin.Settings;
@@ -343,6 +343,7 @@ namespace Ac109RDriverWin
             colorRow.Controls.Add(CreateInlineLabel("B"));
             colorRow.Controls.Add(blueNumber);
             colorRow.Controls.Add(CreateButton(T("FillProfile"), FillProfileButtonClick));
+            colorRow.Controls.Add(CreateButton(T("SaveColorProfile"), SaveColorProfileButtonClick));
 
             TableLayoutPanel jsonRow = new TableLayoutPanel();
             jsonRow.Dock = DockStyle.Top;
@@ -656,12 +657,18 @@ namespace Ac109RDriverWin
         {
             try
             {
-                return new Bitmap(Properties.Resources.icon);
+                System.Resources.ResourceManager resources = new System.Resources.ResourceManager("Ac109RDriverWin.Properties.Resources", typeof(MainForm).Assembly);
+                Bitmap icon = resources.GetObject("icon") as Bitmap;
+                if (icon != null)
+                {
+                    return new Bitmap(icon);
+                }
             }
             catch
             {
-                return Icon.ToBitmap();
             }
+
+            return Icon.ToBitmap();
         }
 
         /// <summary>
@@ -1219,6 +1226,33 @@ namespace Ac109RDriverWin
             });
         }
 
+        /// <summary>
+        /// Saves the current RGB quick color as a managed personal profile.
+        /// </summary>
+        private void SaveColorProfileButtonClick(object sender, EventArgs e)
+        {
+            byte red = (byte)redNumber.Value;
+            byte green = (byte)greenNumber.Value;
+            byte blue = (byte)blueNumber.Value;
+            string defaultName = TF("ColorProfileDefaultName", red, green, blue);
+            string requestedName = PromptForProfileName(T("SaveColorProfileTitle"), defaultName);
+            if (string.IsNullOrWhiteSpace(requestedName))
+            {
+                return;
+            }
+
+            try
+            {
+                KeyColor[] keys = ProfileParser.CreateFilled(red, green, blue);
+                string path = UserProfileStore.SaveCopy(requestedName, keys);
+                RefreshUserProfiles(path);
+                AppendLog(TF("ColorProfileCreated", path));
+            }
+            catch (Exception ex)
+            {
+                ShowError(ex);
+            }
+        }
         /// <summary>
         /// Loads an external JSON profile directly to the keyboard.
         /// </summary>
@@ -1836,3 +1870,6 @@ namespace Ac109RDriverWin
         }
     }
 }
+
+
+
