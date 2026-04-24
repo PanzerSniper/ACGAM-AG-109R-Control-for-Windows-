@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.props" Condition="Exists('$(MSBuildToolsPath)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A14E8FE4-4518-4D95-93B8-50D518138733}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Ac109RDriverWin</RootNamespace>
+    <AssemblyName>Ac109RDriverWin</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <ApplicationIcon>..\AC109RWinForms_Icon\app.ico</ApplicationIcon>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <CodePage>65001</CodePage>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Hardware\Ac109KeyboardClient.cs" />
+    <Compile Include="Hardware\Crc16Ccitt.cs" />
+    <Compile Include="Hardware\HidDeviceConnection.cs" />
+    <Compile Include="Hardware\PacketBuilder.cs" />
+    <Compile Include="Localization.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Macros\MacroAction.cs" />
+    <Compile Include="Macros\MacroBinding.cs" />
+    <Compile Include="Macros\MacroManager.cs" />
+    <Compile Include="Profiles\BuiltInProfile.cs" />
+    <Compile Include="Profiles\BuiltInProfiles.cs" />
+    <Compile Include="Profiles\KeyColor.cs" />
+    <Compile Include="Profiles\KeyboardLayout.cs" />
+    <Compile Include="Profiles\KeyMap.cs" />
+    <Compile Include="Profiles\ProfileData.cs" />
+    <Compile Include="Profiles\ProfileParser.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\AppConfiguration.cs" />
+    <Compile Include="Settings\ConfigurationStore.cs" />
+    <Compile Include="Settings\StartupManager.cs" />
+    <Compile Include="Profiles\UserProfileStore.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\AC109RWinForms_Icon\app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Target Name="GenerateBuildInfo" BeforeTargets="BeforeCompile">
+    <PropertyGroup>
+      <GeneratedBuildInfoDir>$(IntermediateOutputPath)Generated\</GeneratedBuildInfoDir>
+      <GeneratedBuildInfoFile>$(GeneratedBuildInfoDir)BuildInfo.g.cs</GeneratedBuildInfoFile>
+      <GeneratedBuildDate>$([System.DateTime]::UtcNow.ToString("yyyy-MM-dd HH:mm:ss 'UTC'"))</GeneratedBuildDate>
+      <GeneratedBuildInfoSource>namespace Ac109RDriverWin { internal static class BuildInfo { public const string BuildDateUtc = "$(GeneratedBuildDate)"%3B } }</GeneratedBuildInfoSource>
+    </PropertyGroup>
+    <MakeDir Directories="$(GeneratedBuildInfoDir)" />
+    <WriteLinesToFile File="$(GeneratedBuildInfoFile)" Overwrite="true" Lines="$(GeneratedBuildInfoSource)" />
+    <ItemGroup>
+      <Compile Include="$(GeneratedBuildInfoFile)" />
+    </ItemGroup>
+  </Target>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
