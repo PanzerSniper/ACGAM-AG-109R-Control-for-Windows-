@@ -19,7 +19,7 @@ namespace Ac109RDriverWin.Settings
             {
                 return Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    "AC109RDriverWin");
+                    "AG109RControl");
             }
         }
 

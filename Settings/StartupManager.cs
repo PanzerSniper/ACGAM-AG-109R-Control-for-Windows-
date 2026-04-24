@@ -11,7 +11,7 @@ namespace Ac109RDriverWin.Settings
     internal static class StartupManager
     {
         private const string RunKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Run";
-        private const string ValueName = "AC109RDriverWin";
+        private const string ValueName = "AG109RControl";
 
         /// <summary>
         /// Enables or disables launch at sign-in for the current Windows user.

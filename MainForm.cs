@@ -1,4 +1,4 @@
-﻿using Ac109RDriverWin.Hardware;
+using Ac109RDriverWin.Hardware;
 using Ac109RDriverWin.Macros;
 using Ac109RDriverWin.Profiles;
 using Ac109RDriverWin.Settings;
@@ -21,7 +21,7 @@ namespace Ac109RDriverWin
         private readonly AppConfiguration configuration;
         private readonly bool launchMinimized;
 
-        private const string ProductDisplayName = "AC109R Control";
+        private const string ProductDisplayName = "AG109R Control";
 
         private bool allowApplicationExit;
         private MacroManager macroManager;
@@ -936,7 +936,7 @@ namespace Ac109RDriverWin
                     return T("NoDeviceFound");
                 }
 
-                return TF("DeviceFound", devices[0]);
+                return TF("DeviceFound", string.Join(Environment.NewLine, devices));
             });
         }
 

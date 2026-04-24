@@ -1,7 +1,7 @@
 namespace Ac109RDriverWin.Hardware
 {
     /// <summary>
-    /// Computes the CRC-CCITT checksum variant used by the AC109R lighting protocol.
+    /// Computes the CRC-CCITT checksum variant used by the AG109R lighting protocol.
     /// </summary>
     internal static class Crc16Ccitt
     {

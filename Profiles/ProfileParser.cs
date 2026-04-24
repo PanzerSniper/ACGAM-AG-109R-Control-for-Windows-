@@ -14,7 +14,7 @@ namespace Ac109RDriverWin.Profiles
     internal static class ProfileParser
     {
         /// <summary>
-        /// Number of key slots transferred by the AC109R profile stream.
+        /// Number of key slots transferred by the AG109R profile stream.
         /// </summary>
         public const int KeyboardKeyCount = 131;
 
@@ -128,7 +128,7 @@ namespace Ac109RDriverWin.Profiles
         }
 
         /// <summary>
-        /// Converts one JSON value array into an AC109R key color.
+        /// Converts one JSON value array into an AG109R key color.
         /// </summary>
         private static KeyColor ParseColor(string keyName, object rawValue)
         {

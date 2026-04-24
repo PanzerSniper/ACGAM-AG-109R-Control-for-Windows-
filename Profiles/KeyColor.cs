@@ -1,7 +1,7 @@
 namespace Ac109RDriverWin.Profiles
 {
     /// <summary>
-    /// Represents one AC109R key color in firmware byte order.
+    /// Represents one AG109R key color in firmware byte order.
     /// </summary>
     internal struct KeyColor
     {

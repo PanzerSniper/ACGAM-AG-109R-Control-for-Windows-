@@ -6,22 +6,22 @@ using System.IO;
 namespace Ac109RDriverWin.Hardware
 {
     /// <summary>
-    /// High-level client for the AC109R lighting protocol.
+    /// High-level client for the AG109R lighting protocol.
     /// </summary>
     internal sealed class Ac109KeyboardClient : IDisposable
     {
         /// <summary>
-        /// USB vendor identifier used by the AC109R keyboard.
+        /// USB vendor identifier used by the AG109R keyboard.
         /// </summary>
         public const ushort VendorId = 0x1EA7;
 
         /// <summary>
-        /// USB product identifier used by the AC109R keyboard.
+        /// USB product identifier used by the AG109R keyboard.
         /// </summary>
         public const ushort ProductId = 0x0907;
 
         private const int StreamBufferLength = 56;
-        private const int DefaultTimeoutMs = 2000;
+        private const int DefaultTimeoutMs = 3000;
         private readonly HidDeviceConnection device;
 
         private Ac109KeyboardClient(HidDeviceConnection device)
@@ -30,7 +30,7 @@ namespace Ac109RDriverWin.Hardware
         }
 
         /// <summary>
-        /// Finds all accessible HID interfaces that match the AC109R vendor and product IDs.
+        /// Finds all accessible HID interfaces that match the AG109R vendor and product IDs.
         /// </summary>
         public static IList<HidDeviceInfo> FindDevices()
         {
@@ -45,10 +45,31 @@ namespace Ac109RDriverWin.Hardware
             IList<HidDeviceInfo> devices = FindDevices();
             if (devices.Count == 0)
             {
-                throw new IOException("AC-109R keyboard not found or lighting interface is inaccessible.");
+                throw new IOException("ACGAM AG-109R keyboard not found or lighting interface is inaccessible.");
             }
 
-            return new Ac109KeyboardClient(HidDeviceConnection.Open(devices[0]));
+            List<string> errors = new List<string>();
+            foreach (HidDeviceInfo deviceInfo in devices)
+            {
+                Ac109KeyboardClient client = null;
+                try
+                {
+                    client = new Ac109KeyboardClient(HidDeviceConnection.Open(deviceInfo));
+                    client.Ping();
+                    return client;
+                }
+                catch (Exception ex)
+                {
+                    if (client != null)
+                    {
+                        client.Dispose();
+                    }
+
+                    errors.Add(deviceInfo + ": " + ex.Message);
+                }
+            }
+
+            throw new IOException("ACGAM AG-109R keyboard was detected, but no HID lighting interface responded. " + string.Join(" | ", errors.ToArray()));
         }
 
         /// <summary>

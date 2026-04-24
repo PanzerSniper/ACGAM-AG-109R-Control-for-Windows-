@@ -8,7 +8,7 @@ namespace Ac109RDriverWin.Profiles
     internal sealed class KeyboardKeySlot
     {
         /// <summary>
-        /// Creates a key slot with an AC109R firmware index and layout coordinates.
+        /// Creates a key slot with an AG109R firmware index and layout coordinates.
         /// </summary>
         public KeyboardKeySlot(int index, string name, float x, float y, float width)
         {

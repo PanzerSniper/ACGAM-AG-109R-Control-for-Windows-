@@ -1,33 +1,33 @@
-<h1 align="center">AC109R Control</h1>
+<h1 align="center">AG109R Control</h1>
 
 <p align="center">
-  <strong>A lightweight Windows controller for the ACGAM AC-109R keyboard lighting profiles and software macros.</strong>
+  <strong>A lightweight Windows controller for the ACGAM AG-109R keyboard lighting profiles and software macros.</strong>
 </p>
 
 <p align="center">
   <img alt="Language" src="https://img.shields.io/badge/C%23-.NET%20Framework%204.8-512bd4">
   <img alt="GUI" src="https://img.shields.io/badge/GUI-WinForms-5d8cff">
   <img alt="Platform" src="https://img.shields.io/badge/Platform-Windows-24292f">
-  <img alt="Keyboard" src="https://img.shields.io/badge/Keyboard-ACGAM%20AC--109R-success">
+  <img alt="Keyboard" src="https://img.shields.io/badge/Keyboard-ACGAM%20AG--109R-success">
   <img alt="Transport" src="https://img.shields.io/badge/Transport-Windows%20HID-informational">
-  <img alt="Version" src="https://img.shields.io/badge/Version-1.0.0-success">
+  <img alt="Version" src="https://img.shields.io/badge/Version-1.0.1-success">
   <img alt="License" src="https://img.shields.io/badge/License-GPL--3.0-blue">
 </p>
 
 ## Overview
 
-AC109R Control is a small Windows application for the ACGAM AC-109R keyboard. It is designed as a stable alternative to the official Windows utility for everyday lighting profile control and software media macros.
+AG109R Control is a small Windows application for the ACGAM AG-109R keyboard. It is designed as a stable alternative to the official Windows utility for everyday lighting profile control and software media macros.
 
 The USB lighting protocol implementation is based on the reverse-engineering work from [`franlego98/ac109rdriverlinux`](https://gitlab.com/franlego98/ac109rdriverlinux).
 
 ## Screenshots
 
 <p align="center">
-  <img alt="AC109R Control main window" src="Docs/screenshots/main.png" width="820">
+  <img alt="AG109R Control main window" src="Docs/screenshots/main.png" width="820">
 </p>
 
 <p align="center">
-  <img alt="AC109R Control macros tab" src="Docs/screenshots/macros.png" width="820">
+  <img alt="AG109R Control macros tab" src="Docs/screenshots/macros.png" width="820">
 </p>
 
 ## Features
@@ -35,7 +35,7 @@ The USB lighting protocol implementation is based on the reverse-engineering wor
 ### Lighting Profiles
 
 - Select and control the three onboard keyboard profile slots.
-- Send built-in static presets such as rainbow, aurora, ocean, fire, warm white, and AC109 magenta.
+- Send built-in static presets such as rainbow, aurora, ocean, fire, warm white, and AG109R magenta.
 - Create editable personal profiles from built-in presets.
 - Import, rename, duplicate, delete, and open personal JSON profiles from the interface.
 - Fill the selected keyboard profile with a custom RGB color.
@@ -43,7 +43,7 @@ The USB lighting protocol implementation is based on the reverse-engineering wor
 
 ### Software Macros
 
-The macro tab registers global Windows hotkeys while AC109R Control is running. Supported actions are:
+The macro tab registers global Windows hotkeys while AG109R Control is running. Supported actions are:
 
 - volume up
 - volume down
@@ -69,7 +69,7 @@ Administrator privileges are not required for normal use. Running elevated shoul
 Editable profiles are stored in:
 
 ```text
-%LOCALAPPDATA%\AC109RDriverWin\Profiles
+%LOCALAPPDATA%\AG109RControl\Profiles
 ```
 
 The JSON format follows the original Linux driver convention:
@@ -90,9 +90,15 @@ Supported value shapes:
 
 ## Release Notes
 
+### 1.0.1 - 2026-04-24
+
+- Improved HID interface probing when several keyboard interfaces are exposed by Windows.
+- Restored explicit errors when the keyboard does not answer HID read requests.
+- Updated release documentation for the 1.0.1 build.
+
 ### 1.0.0 - 2026-04-24
 
-- First stable release of AC109R Control.
+- First stable release of AG109R Control.
 - Added built-in static presets and personal JSON profile management.
 - Added quick RGB fill and save-as-profile actions.
 - Added global software macros for volume and media controls.
@@ -110,14 +116,27 @@ Requirements:
 Build from the solution directory:
 
 ```powershell
-msbuild AC109RWinForms.sln /p:Configuration=Release /p:Platform="Any CPU"
+msbuild *.sln /p:Configuration=Release /p:Platform="Any CPU"
 ```
 
 The executable is generated at:
 
 ```text
-bin\Release\Ac109RDriverWin.exe
+bin\Release\AG109RControl.exe
 ```
+
+## Troubleshooting
+
+### `HID read timed out`
+
+If the application detects the keyboard but reports `HID read timed out`, Windows exposed a matching USB interface but the keyboard did not answer the protocol read request. In this case the command is not considered successful.
+
+Try the following:
+
+- close the official ACGAM software if it is running
+- unplug and reconnect the keyboard
+- try another USB port, preferably directly on the PC
+- run AG109R Control as administrator only for troubleshooting
 
 ## Technical Notes
 
@@ -148,13 +167,14 @@ The application writes the same profile stream structure used by the Linux proje
 - Firmware-native dynamic lighting effects are not implemented yet.
 - Macro support is implemented with Windows global hotkeys, not firmware-level keyboard macro programming.
 - The original public Linux project documents lighting profiles, not the complete official Windows software feature set.
-- If the official AC109R software is running, it may lock the HID interface. Close it before using this application.
+- If the official ACGAM software is running, it may lock the HID interface. Close it before using this application.
 
 ## AI Assistance
 
 AI assistance was used during the development of this project to help with code structure, documentation, UI text, and review. The project remains manually reviewed and tested before release.
 
 ## Credits
+
 This project builds on the protocol research and Linux implementation by Francisco Sanchez Lopez:
 
 - GitLab: [`franlego98/ac109rdriverlinux`](https://gitlab.com/franlego98/ac109rdriverlinux)
@@ -163,4 +183,4 @@ CRC logic is a C# port of the CCITT algorithm used by the original project.
 
 ## License
 
-This project is distributed under the GPL-3.0 license, matching the original AC109R Linux driver license.
+This project is distributed under the GPL-3.0 license, matching the original AG109R Linux driver license.

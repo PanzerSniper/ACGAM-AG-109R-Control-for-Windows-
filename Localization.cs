@@ -60,8 +60,8 @@ namespace Ac109RDriverWin
             { "MappedKeys", "{0} touche(s) mapp\u00e9e(s)" },
             { "InvalidProfile", "Profil invalide : {0}" },
             { "BuiltInReadOnly", "Les profils int\u00e9gr\u00e9s sont en lecture seule." },
-            { "NoDeviceFound", "Aucun clavier AC109R accessible trouv\u00e9." },
-            { "DeviceFound", "Clavier trouv\u00e9 : {0}" },
+            { "NoDeviceFound", "Aucun clavier ACGAM AG-109R accessible trouv\u00e9." },
+            { "DeviceFound", "Interface(s) ACGAM AG-109R trouv\u00e9e(s) :\r\n{0}" },
             { "PingOk", "Test OK." },
             { "ProfileActivated", "Profil {0} activ\u00e9." },
             { "ProfileTurnedOff", "Profil {0} \u00e9teint." },
@@ -82,11 +82,11 @@ namespace Ac109RDriverWin
             { "DeleteProfileQuestion", "Supprimer le profil \"{0}\" ?" },
             { "ProfileDeleted", "Profil supprim\u00e9 : {0}" },
             { "ProfileListRefreshed", "Liste des profils actualis\u00e9e." },
-            { "ChooseProfileTitle", "Choisir un profil AC109R" },
+            { "ChooseProfileTitle", "Choisir un profil AG109R" },
             { "JsonLoaded", "Profil {0} charg\u00e9 depuis le JSON ({1} touche(s))." },
             { "IgnoredKeys", " Touches ignor\u00e9es : {0}" },
             { "DuplicateHotkey", "Ce raccourci est d\u00e9j\u00e0 configur\u00e9." },
-            { "MacroTitle", "Macros AC109R" },
+            { "MacroTitle", "Macros AG109R" },
             { "HotkeyWithoutModifiers", "Les raccourcis globaux sans modificateur peuvent g\u00eaner la saisie normale. Continuer ?" },
             { "SettingsSaved", "Param\u00e8tres enregistr\u00e9s." },
             { "ErrorPrefix", "Erreur : {0}" },
@@ -104,8 +104,8 @@ namespace Ac109RDriverWin
             { "JsonKeyByteRange", "La touche \"{0}\" contient une valeur hors de la plage 0-255." },
             { "ProfileSlotCount", "Le profil doit contenir 131 emplacements de touches." },
             { "HotkeyRegisterFailed", "Impossible d'enregistrer le raccourci {0}." },
-            { "AlreadyRunning", "AC109R Control est d\u00e9j\u00e0 lanc\u00e9." },
-            { "ChangelogText", "Version 1.0.0 - 24/04/2026\r\n\r\nNouveaut\u00e9s\r\n- Contr\u00f4le des profils lumineux AC109R depuis une interface Windows simple.\r\n- Profils pr\u00e9d\u00e9finis en lecture seule, avec cr\u00e9ation de profils personnels modifiables.\r\n- Gestion des profils personnels : import JSON, renommage, duplication, suppression et ouverture du dossier.\r\n- Actions rapides pour remplir un profil avec une couleur RGB et l'enregistrer comme profil personnel.\r\n- Macros logicielles globales pour le volume et les commandes m\u00e9dia.\r\n- Interface disponible en fran\u00e7ais et en anglais.\r\n\r\nComportement Windows\r\n- Lancement automatique avec Windows, avec option de d\u00e9marrage r\u00e9duit.\r\n- Une seule instance de l'application peut tourner en m\u00eame temps.\r\n- Ic\u00f4ne de notification pour garder les macros actives en arri\u00e8re-plan.\r\n\r\nLimitations connues\r\n- Les effets dynamiques natifs du firmware ne sont pas encore pris en charge.\r\n- Les macros sont des raccourcis Windows, pas une programmation interne du clavier.\r\n- Le logiciel officiel AC109R doit \u00eatre ferm\u00e9 s'il verrouille l'interface HID." },
+            { "AlreadyRunning", "AG109R Control est d\u00e9j\u00e0 lanc\u00e9." },
+            { "ChangelogText", "Version 1.0.1 - 24/04/2026\r\n\r\nCorrections\r\n- D\u00e9tection HID plus stricte : l'application essaie chaque interface du clavier jusqu'\u00e0 trouver celle qui r\u00e9pond vraiment.\r\n- Les timeouts de lecture HID restent affich\u00e9s au lieu d'\u00eatre masqu\u00e9s comme des succ\u00e8s.\r\n- Messages et documentation align\u00e9s pour la version 1.0.1.\r\n\r\nNotes\r\n- Si le clavier est d\u00e9tect\u00e9 mais ne r\u00e9pond pas au ping HID, aucune commande lumineuse n'est consid\u00e9r\u00e9e comme r\u00e9ussie.\r\n- Fermez le logiciel officiel ACGAM s'il est ouvert, puis essayez un autre port USB si le timeout persiste." },
             { "Ok", "OK" },
             { "Cancel", "Annuler" },
             { "PreviewNoProfile", "Aucun profil" },
@@ -129,8 +129,8 @@ namespace Ac109RDriverWin
             { "PresetFireDescription", "D\u00e9grad\u00e9 rouge, orange et jaune." },
             { "PresetWarmWhite", "Blanc chaud" },
             { "PresetWarmWhiteDescription", "\u00c9clairage blanc l\u00e9g\u00e8rement chaud." },
-            { "PresetRoseAC109", "Rose AC109" },
-            { "PresetRoseAC109Description", "Couleur proche du modèle fourni par le dépôt Linux." }
+            { "PresetRoseAG109R", "Rose AG109R" },
+            { "PresetRoseAG109RDescription", "Couleur proche du modèle fourni par le dépôt Linux." }
         };
 
         private static readonly Dictionary<string, string> EnglishTexts = new Dictionary<string, string>
@@ -180,8 +180,8 @@ namespace Ac109RDriverWin
             { "MappedKeys", "{0} mapped key(s)" },
             { "InvalidProfile", "Invalid profile: {0}" },
             { "BuiltInReadOnly", "Built-in presets are read-only." },
-            { "NoDeviceFound", "No accessible AC109R device found." },
-            { "DeviceFound", "Device found: {0}" },
+            { "NoDeviceFound", "No accessible ACGAM AG-109R device found." },
+            { "DeviceFound", "ACGAM AG-109R interface(s) found:\r\n{0}" },
             { "PingOk", "Ping OK." },
             { "ProfileActivated", "Profile {0} activated." },
             { "ProfileTurnedOff", "Profile {0} turned off." },
@@ -202,11 +202,11 @@ namespace Ac109RDriverWin
             { "DeleteProfileQuestion", "Delete the profile \"{0}\"?" },
             { "ProfileDeleted", "Profile deleted: {0}" },
             { "ProfileListRefreshed", "User profile list refreshed." },
-            { "ChooseProfileTitle", "Choose an AC109R profile" },
+            { "ChooseProfileTitle", "Choose an AG109R profile" },
             { "JsonLoaded", "Profile {0} loaded from JSON ({1} keys)." },
             { "IgnoredKeys", " Ignored keys: {0}" },
             { "DuplicateHotkey", "This shortcut is already configured." },
-            { "MacroTitle", "AC109R macros" },
+            { "MacroTitle", "AG109R macros" },
             { "HotkeyWithoutModifiers", "Global hotkeys without modifiers can interfere with normal typing. Continue?" },
             { "SettingsSaved", "Settings saved." },
             { "ErrorPrefix", "Error: {0}" },
@@ -224,8 +224,8 @@ namespace Ac109RDriverWin
             { "JsonKeyByteRange", "Key \"{0}\" contains a value outside the 0-255 range." },
             { "ProfileSlotCount", "The profile must contain 131 key slots." },
             { "HotkeyRegisterFailed", "Unable to register hotkey {0}." },
-            { "AlreadyRunning", "AC109R Control is already running." },
-            { "ChangelogText", "Version 1.0.0 - 2026-04-24\r\n\r\nNew\r\n- Control AC109R lighting profiles from a simple Windows interface.\r\n- Read-only built-in presets with editable personal profile creation.\r\n- Personal profile management: JSON import, rename, duplicate, delete, and open folder.\r\n- Quick actions to fill a profile with an RGB color and save it as a personal profile.\r\n- Global software macros for volume and media controls.\r\n- French and English interface.\r\n\r\nWindows behavior\r\n- Start with Windows, with an optional minimized startup mode.\r\n- Only one application instance can run at a time.\r\n- Notification area icon keeps macros active in the background.\r\n\r\nKnown limitations\r\n- Firmware-native dynamic effects are not supported yet.\r\n- Macros are Windows shortcuts, not onboard keyboard programming.\r\n- The official AC109R software must be closed if it locks the HID interface." },
+            { "AlreadyRunning", "AG109R Control is already running." },
+            { "ChangelogText", "Version 1.0.1 - 2026-04-24\r\n\r\nFixes\r\n- Stricter HID probing: the application now tries each keyboard interface until one really answers.\r\n- HID read timeouts remain visible instead of being treated as successful writes.\r\n- Messages and documentation updated for version 1.0.1.\r\n\r\nNotes\r\n- If the keyboard is detected but does not answer the HID ping, no lighting command is treated as successful.\r\n- Close the official ACGAM software if it is running, then try another USB port if the timeout persists." },
             { "Ok", "OK" },
             { "Cancel", "Cancel" },
             { "PreviewNoProfile", "No profile" },
@@ -249,8 +249,8 @@ namespace Ac109RDriverWin
             { "PresetFireDescription", "Red, orange, and yellow fire gradient." },
             { "PresetWarmWhite", "Warm white" },
             { "PresetWarmWhiteDescription", "Slightly warm white lighting." },
-            { "PresetRoseAC109", "Rose AC109" },
-            { "PresetRoseAC109Description", "Color close to the template provided by the Linux repository." }
+            { "PresetRoseAG109R", "Rose AG109R" },
+            { "PresetRoseAG109RDescription", "Color close to the template provided by the Linux repository." }
         };
 
         /// <summary>
@@ -376,8 +376,8 @@ namespace Ac109RDriverWin
                     return "PresetFire";
                 case "Warm white":
                     return "PresetWarmWhite";
-                case "Rose AC109":
-                    return "PresetRoseAC109";
+                case "Rose AG109R":
+                    return "PresetRoseAG109R";
                 default:
                     return internalName;
             }

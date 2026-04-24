@@ -83,7 +83,7 @@ namespace Ac109RDriverWin.Profiles
                 ProfileParser.CreateFilled(255, 214, 170)));
 
             profiles.Add(new BuiltInProfile(
-                "Rose AC109",
+                "Rose AG109R",
                 "Color close to the template provided by the Linux repository.",
                 ProfileParser.CreateFilled(255, 0, 255)));
 

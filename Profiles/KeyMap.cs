@@ -22,7 +22,7 @@ namespace Ac109RDriverWin.Profiles
     }
 
     /// <summary>
-    /// Maps profile JSON key names to AC109R firmware key indexes.
+    /// Maps profile JSON key names to AG109R firmware key indexes.
     /// </summary>
     internal static class KeyMap
     {

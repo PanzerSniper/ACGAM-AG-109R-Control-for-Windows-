@@ -8,7 +8,7 @@ namespace Ac109RDriverWin.Hardware
     internal static class PacketBuilder
     {
         /// <summary>
-        /// Fixed AC109R command packet length.
+        /// Fixed AG109R command packet length.
         /// </summary>
         public const int PacketLength = 64;
 
@@ -18,7 +18,7 @@ namespace Ac109RDriverWin.Hardware
         public const int MaxCommandLength = 62;
 
         /// <summary>
-        /// Places command bytes into the AC109R packet layout and writes the CRC at byte offsets 6 and 7.
+        /// Places command bytes into the AG109R packet layout and writes the CRC at byte offsets 6 and 7.
         /// </summary>
         public static byte[] Build(byte[] command, int size)
         {
