@@ -150,8 +150,11 @@ The application writes the same profile stream structure used by the Linux proje
 - The original public Linux project documents lighting profiles, not the complete official Windows software feature set.
 - If the official AC109R software is running, it may lock the HID interface. Close it before using this application.
 
-## Credits
+## AI Assistance
 
+AI assistance was used during the development of this project to help with code structure, documentation, UI text, and review. The project remains manually reviewed and tested before release.
+
+## Credits
 This project builds on the protocol research and Linux implementation by Francisco Sanchez Lopez:
 
 - GitLab: [`franlego98/ac109rdriverlinux`](https://gitlab.com/franlego98/ac109rdriverlinux)
